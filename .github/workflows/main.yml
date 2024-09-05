@@ -1,0 +1,47 @@
+name: CI/CD for Common Services
+
+# This workflow triggers on push or pull request to the develop branch
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'common-services/**'
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  # Job to build, test, and deploy Common Services
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js (or adjust according to your project stack)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      # Step 3: Install dependencies for Common Services
+      - name: Install dependencies
+        run: |
+          cd common-services
+          npm install  # Adjust this based on your project's package manager
+
+      # Step 4: Run tests (if applicable)
+      - name: Run tests
+        run: |
+          cd common-services
+          npm test  # Modify based on how you run tests
+
+      # Step 5: Build and Deploy Common Services
+      - name: Build and Deploy
+        run: |
+          cd common-services
+          npm run build  # Adjust based on your project's build process
+          npm run deploy  # Add deployment steps or commands here
