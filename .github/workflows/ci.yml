@@ -1,4 +1,4 @@
-name: CI/CD Pipeline for Common Services
+name: CI/CD Pipeline for Common Services (Java)
 
 on:
   push:
@@ -21,15 +21,13 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          distribution: 'adopt'  # Install AdoptOpenJDK
-          java-version: '11'     # Adjust based on your Java version
+          distribution: 'adopt'  # Or 'temurin'
+          java-version: '17'     # Set Java version to 17
 
       - name: Build with Maven
-        run: |
-          cd common-services
-          mvn install
+        working-directory: common-services  # Specify the correct directory
+        run: mvn install
 
       - name: Run tests
-        run: |
-          cd common-services
-          mvn test
+        working-directory: common-services  # Specify the correct directory
+        run: mvn test
