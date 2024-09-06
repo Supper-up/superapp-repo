@@ -1,3 +1,13 @@
+name: CI/CD Pipeline for Common Services
+
+on:
+  push:
+    branches:
+      - feature/naod-cicd
+  pull_request:
+    branches:
+      - develop
+
 jobs:
   build:
     runs-on: ubuntu-latest
