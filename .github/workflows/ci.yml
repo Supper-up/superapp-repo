@@ -18,22 +18,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
         with:
-          node-version: '14'
+          distribution: 'adopt'  # Install AdoptOpenJDK
+          java-version: '11'     # Adjust based on your Java version
 
-      - name: Install dependencies
+      - name: Build with Maven
         run: |
           cd common-services
-          npm install
+          mvn install
 
       - name: Run tests
         run: |
           cd common-services
-          npm test
-
-      - name: Build and Deploy
-        run: |
-          cd common-services
-          npm run build
+          mvn test
