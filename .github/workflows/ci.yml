@@ -21,13 +21,14 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          distribution: 'adopt'  # Or 'temurin'
-          java-version: '17'     # Set Java version to 17
+          distribution: 'adopt'
+          java-version: '17'     # Use Java 17, based on your local version
+
+      - name: Navigate to common-services
+        run: cd common-services   # Navigate to common-services directory
 
       - name: Build with Maven
-        working-directory: common-services  # Specify the correct directory
         run: mvn install
 
       - name: Run tests
-        working-directory: common-services  # Specify the correct directory
         run: mvn test
