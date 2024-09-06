@@ -1,34 +1,16 @@
-name: CI/CD Pipeline for Common Services (Java)
-
-on:
-  push:
-    branches:
-      - develop
-    paths:
-      - 'common-services/**'
-  pull_request:
-    branches:
-      - develop
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up JDK
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v1
         with:
-          distribution: 'adopt'
-          java-version: '17'     # Use Java 17, based on your local version
-
-      - name: Navigate to common-services
-        run: cd common-services   # Navigate to common-services directory
+          java-version: '17'
 
       - name: Build with Maven
-        run: mvn install
-
-      - name: Run tests
-        run: mvn test
+        run: |
+          cd common-services
+          mvn install
